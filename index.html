@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Whatsapp API</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <div>
+        <h1>WA API</h1>
+        <p>Test API</p>
+        <img src="" alt="QRCODE" id="qrcode">
+        <h3>Logs:</h3>
+        <ul class="logs"></ul>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.min.js" integrity="sha512-Jq1JnVXlkYQOYQpz31qIV/0l67d97J9I6sbILtfiSYX00Isr2zK7XDRmHW8d2iBTwNZfL7sHkHGT0EzLs90jdw==" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            var socket = io.connect('43.243.186.78:8000', { path: '/socket.io'});
+            socket.on('message', function(msg){
+                $('.logs').append($('<li>').text(msg));
+            });
+            socket.on('qr',function(src){
+                $('#qrcode').attr('src', src);
+            });
+        });
+    </script>
+</body>
+</html>
